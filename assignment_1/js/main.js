@@ -18,7 +18,7 @@ function change_title() {
     page_name = window.location.href.split('/').slice(-1)[0].split('.')[0] || 'index';
     current_page = capitalize(page_name);
     document.title = make_title(current_page);
-    return document.title
+    return current_page
 }
 
 /* assignment 2 */
