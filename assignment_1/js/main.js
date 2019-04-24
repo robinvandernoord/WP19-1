@@ -13,6 +13,7 @@ function capitalize(string) {
 }
 
 function change_title() {
+    // change the title of the page
     let page_name, current_page;
     /* use index as default for when you visit the folder: */
     page_name = window.location.href.split('/').slice(-1)[0].split('.')[0] || 'index';
@@ -23,6 +24,7 @@ function change_title() {
 
 /* assignment 2 */
 function add_article() {
+    // add an article to the index page
     let new_article, new_heading, new_paragraph;
 
     new_article = document.createElement('article');
@@ -41,6 +43,7 @@ function add_article() {
 
 /* assignment 3 + 4 */
 function change_footer() {
+    // add a link to the footer and open it in a new tab
     let third_link = document.querySelectorAll('footer #myTabContent li a')[2];
     third_link.href = 'https://google.com';
     third_link.target = "_blank";
@@ -48,6 +51,7 @@ function change_footer() {
 
 /* assignment 5 */
 function make_red() {
+    // make the children of nav-item red
     /* nav-item doesn't make the text red, nav-link does */
     for (let element of document.getElementsByClassName('nav-link')) {
         element.style.color = 'red';
@@ -56,6 +60,7 @@ function make_red() {
 
 /* assignment 6 */
 function make_object() {
+    // create an object
     return {
         'Week 1': 'Assignment 1',
         'Week 2': 'No lecture',
@@ -68,6 +73,7 @@ function make_object() {
 }
 
 function display_object(obj, element) {
+    // show an object
     let newparagraph = document.createElement('p');
     let representation = '';
     for (let key in obj) {
@@ -82,11 +88,14 @@ function display_object(obj, element) {
 
 /* assignment 7 */
 function wrap(el, wrapper) {
+    // helper function to wrap an element in an other element
+    // needed to create a 'row' around the columns for the sidebar
     el.parentNode.insertBefore(wrapper, el);
     wrapper.appendChild(el);
 }
 
 function add_sidebar() {
+    // create a sidebar and wrap a row around the content and sidebar
     let container, new_sidebar, new_header, new_row, content, sidebar_article;
     container = document.querySelector('.container');
     content = container.querySelector('.col-md-12');
@@ -113,7 +122,7 @@ function add_sidebar() {
 }
 
 function main() {
-    // main
+    // main, execute all functions.
     let article_element, current_page, myobject;
 
     current_page = change_title();
@@ -128,4 +137,5 @@ function main() {
     }
 }
 
+// start it all after the page has finished loading:
 window.addEventListener('load', main);
