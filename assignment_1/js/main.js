@@ -25,7 +25,7 @@ function change_title() {
 /* assignment 2 */
 function add_article() {
     // add an article to the index page
-    let new_article, new_heading, new_paragraph;
+    let new_article, new_heading, new_paragraph, container_column;
 
     new_article = document.createElement("article");
 
@@ -37,7 +37,8 @@ function add_article() {
     new_paragraph.innerText = "De planning van de komende weken is als volgt:";
     new_article.appendChild(new_paragraph);
 
-    document.getElementsByClassName("container")[0].appendChild(new_article);
+    container_column = document.querySelector(".container .col-md-12");
+    container_column.appendChild(new_article);
     return new_article;
 }
 
