@@ -12,8 +12,15 @@ $navigation = Array(
 include __DIR__ . '/tpl/head.php';/* Body */
 include __DIR__ . '/tpl/body-start.php';
 ?>
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<h1>Links!</h1>
+		<div id="mylinks">
+		</div>
+	</div>
+	<div class="col-md-6">
+		<h1>Input!</h1>
+		<div id="myform">
+		</div>
 	</div>
 <?php
 include __DIR__ . '/tpl/body-end.php';
