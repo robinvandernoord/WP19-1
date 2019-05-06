@@ -69,6 +69,23 @@ function writeFormData(values) {
     $('#form-content').show();
 }
 
+function change_tab() {
+    /* todo: change if # in url */
+    let self, other;
+    // get whether it is contact or link
+    self = this.id.split('-')[0];
+    // other is whatever self isn't
+    other = self === 'contact' ? 'link' : 'contact';
+    // give the clicked menu item a white background and remove it from the other item:
+    $(this).addClass('active');
+    $(`#myTab #${other}-tab`).removeClass('active');
+    // show the clicked content and hide the other content:
+    // (`id^=` has to be used because it's `link[s]` and `content`)
+    $(`#myTabContent div[id^=${self}]`).addClass('active');
+    $(`#myTabContent div[id^=${other}]`).removeClass('active');
+}
+
+
 $(function () {
     $('#submit').on('click', function (e) {
         let values = {};
@@ -81,21 +98,6 @@ $(function () {
     // ( just passing `$('#form-content, #form-alert').hide` didnt work)
     $('#erase').on('click', () => $('#form-content, #form-alert').hide());
 
-    $('#myTab a').on('click', function(){
-        let self, other;
-        // get whether it is contact or link
-        self = this.id.split('-')[0];
-        // other is whatever self isn't
-        other = self === 'contact' ? 'link' : 'contact';
-        // give the clicked menu item a white background and remove it from the other item:
-        $(this).addClass('active');
-        $(`#myTab #${other}-tab`).removeClass('active');
-        // show the clicked content and hide the other content:
-        // (`id^=` has to be used because it's `link[s]` and `content`)
-        $(`#myTabContent div[id^=${self}]`).addClass('active');
-        $(`#myTabContent div[id^=${other}]`).removeClass('active');
-
-    });
-
+    $('#myTab a').on('click', change_tab);
 
 });
