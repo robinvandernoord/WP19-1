@@ -1,13 +1,13 @@
 const regexes = {
-    'number': /^\d+$/,
-    'text': /^[A-z ]+$/,
-    'tel': /^[0-9 +]+$/,
-    'email': /^[A-z.0-9!#$%&'*+\-/=?^_`{|}~]{1,65}@[A-z0-9.-]+\.\w+$/,
+    "number": /^\d+$/,
+    "text": /^[A-z ]+$/,
+    "tel": /^[0-9 +]+$/,
+    "email": /^[A-z.0-9!#$%&'*+\-/=?^_`{|}~]{1,65}@[A-z0-9.-]+\.\w+$/,
     // rules for email from https://en.wikipedia.org/wiki/Email_address#Syntax
 };
 
 function capitalize(s) {
-    return s.charAt(0).toUpperCase() + s.slice(1)
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function validateForm(values) {
@@ -15,15 +15,15 @@ function validateForm(values) {
     // `e` is the event
     let errors = [];
 
-    $('#mainform .form-group input').each(function (index, element) {
+    $("#mainform .form-group input").each(function (index, element) {
         // check each form item
         // look for the data-validate attribute, with 'text' as default
-        let use_regex = regexes[$(element).data('validate') || 'text'];
+        let use_regex = regexes[$(element).data("validate") || "text"];
         if (element.value) {
             // if the field is filled in
             if (!use_regex.test(element.value)) {
                 // if the field does not match the right regular expression, give an error
-                let fieldtip = $(element).data('tip');
+                let fieldtip = $(element).data("tip");
                 errors.push(`Field ${element.id}: ${fieldtip}`);
             } else {
                 values[element.id] = element.value;
@@ -36,9 +36,9 @@ function validateForm(values) {
 
     if (errors && errors.length) {
         // if the error array has anything in it, show the error(s)
-        $('#form-alert')
+        $("#form-alert")
             .show()
-            .html(errors.join('<br>'));
+            .html(errors.join("<br>"));
 
         return false;
     } else {
@@ -49,40 +49,40 @@ function validateForm(values) {
 
 function writeFormData(values) {
     let tbody;
-    $('#form-content tbody').remove(); // delete old table
-    tbody = $('<tbody>');
+    $("#form-content tbody").remove(); // delete old table
+    tbody = $("<tbody>");
     $.each(values, function (key, value) {
         let th, td, tr;
-        th = $('<th>');
-        th.attr('scope', 'row');
+        th = $("<th>");
+        th.attr("scope", "row");
         th.text(capitalize(key));
 
-        td = $('<td>');
+        td = $("<td>");
         td.text(value);
 
-        tr = $('<tr>');
+        tr = $("<tr>");
         tr.append(th).append(td);
         tbody.append(tr);
     });
-    $('#form-content table').append(tbody);
-    $('#form-alert').hide();
-    $('#form-content').show();
+    $("#form-content table").append(tbody);
+    $("#form-alert").hide();
+    $("#form-content").show();
 }
 
 function change_tab() {
     /* todo: change if # in url */
     let self, other;
     // get whether it is contact or link
-    self = this.id.split('-')[0];
+    self = this.id.split("-")[0];
     // other is whatever self isn't
-    other = self === 'contact' ? 'link' : 'contact';
+    other = self === "contact" ? "link" : "contact";
     // give the clicked menu item a white background and remove it from the other item:
-    $(this).addClass('active');
-    $(`#myTab #${other}-tab`).removeClass('active');
+    $(this).addClass("active");
+    $(`#myTab #${other}-tab`).removeClass("active");
     // show the clicked content and hide the other content:
     // (`id^=` has to be used because it's `link[s]` and `content`)
-    $(`#myTabContent div[id^=${self}]`).addClass('active');
-    $(`#myTabContent div[id^=${other}]`).removeClass('active');
+    $(`#myTabContent div[id^=${self}]`).addClass("active");
+    $(`#myTabContent div[id^=${other}]`).removeClass("active");
 }
 
 function handle_submit() {
@@ -94,15 +94,15 @@ function handle_submit() {
 }
 
 function handle_erase(){
-    $('#form-content, #form-alert').hide();
-    $('input').val('');
+    $("#form-content, #form-alert").hide();
+    $("input").val("");
 }
 
 
 $(function () {
-    $('#submit').on('click', handle_submit);
-    $('#erase').on('click', handle_erase);
+    $("#submit").on("click", handle_submit);
+    $("#erase").on("click", handle_erase);
 
-    $('#myTab a').on('click', change_tab);
+    $("#myTab a").on("click", change_tab);
 
 });
