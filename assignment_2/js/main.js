@@ -85,18 +85,23 @@ function change_tab() {
     $(`#myTabContent div[id^=${other}]`).removeClass('active');
 }
 
+function handle_submit() {
+    let values = {};
+    if (validateForm(values)) {
+        // values should be filled in now
+        writeFormData(values);
+    }
+}
+
+function handle_erase(){
+    $('#form-content, #form-alert').hide();
+    $('input').val('');
+}
+
 
 $(function () {
-    $('#submit').on('click', function (e) {
-        let values = {};
-        if (validateForm(values)) {
-            // values should be filled in now
-            writeFormData(values);
-        }
-    });
-    // `() =>` is shorthand for creating a nameless function
-    // ( just passing `$('#form-content, #form-alert').hide` didnt work)
-    $('#erase').on('click', () => $('#form-content, #form-alert').hide());
+    $('#submit').on('click', handle_submit);
+    $('#erase').on('click', handle_erase);
 
     $('#myTab a').on('click', change_tab);
 
