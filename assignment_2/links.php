@@ -21,6 +21,7 @@ include __DIR__ . '/tpl/body-start.php';
 		<h1>Input!</h1>
 		<div id="myform">
 		</div>
+        <div id="feedback"></div>
 	</div>
 <?php
 include __DIR__ . '/tpl/body-end.php';
