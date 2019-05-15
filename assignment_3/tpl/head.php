@@ -1,4 +1,9 @@
 <?php
+/* enable errors for debug */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // P_Print function
 function p_print($array){
     echo "<pre>";
@@ -21,6 +26,12 @@ function p_print($array){
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<?php if($navigation['active'] == 'Leap Year'):?>
+        <script type="application/javascript" src="scripts/js/leapyear.js"></script>
+    <?php elseif($navigation['active'] == 'News'): ?>
+        <script type="application/javascript" src="scripts/js/newsloader.js"></script>
+
+	<?php endif; ?>
 </head>
 <body>
 <header>
