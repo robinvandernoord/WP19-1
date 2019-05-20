@@ -1,15 +1,6 @@
 <?php
-/* enable errors for debug */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-// P_Print function
-function p_print($array) {
-	echo "<pre>";
-	print_r($array);
-	echo "</pre>";
-}
+include 'scripts/functions.php';
 
 ?>
 
@@ -32,13 +23,14 @@ function p_print($array) {
         <script type="application/javascript" src="scripts/js/leapyear.js"></script>
 	<?php elseif ($navigation['active'] == 'News'): ?>
         <script type="application/javascript" src="scripts/js/newsloader.js"></script>
-
+	<?php elseif ($navigation['active'] == 'Add news item'): ?>
+        <script type="application/javascript" src="scripts/js/newsform.js"></script>
 	<?php endif; ?>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">WP19 Assignment 3</a>
+        <a class="navbar-brand" href="index.php">WP19 Assignment 3</a>
         <ul class="navbar-nav mr-auto">
 			<?php $active = $navigation['active']; ?>
 			<?php foreach($navigation['items'] as $title => $url) {
