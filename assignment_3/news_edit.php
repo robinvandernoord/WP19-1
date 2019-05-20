@@ -1,11 +1,4 @@
 <?php
-/* enable errors for debug */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-$file = 'data/articles.json';
 
 /* Header */
 $page_title = 'Webprogramming Assignment 3';
@@ -24,21 +17,16 @@ include __DIR__ . '/tpl/body_start.php';
 
 
 if (isset($_GET['id'])) {
-	$edit_id = $_GET['id'];
+	$id = $_GET['id'];
 } else {
 	header("Location: news_add.php");
 	die();
 }
 
-$all_items = json_decode(file_get_contents($file), true);
 
-$selected_item = array_reverse(array_filter($all_items, function($var) use ($edit_id) {
-	return $var['id'] == $edit_id;
-}));
+$info = get_content($id);
 
-
-foreach($selected_item as $id => $info): # should only be one
-	?>
+?>
 
     <div class="row">
         <div class="col col-12">
@@ -54,11 +42,15 @@ foreach($selected_item as $id => $info): # should only be one
                         changed!
 					<?php endif ?>
                 </div>
+			<?php elseif (isset($_GET['error'])): ?>
+                <div class="alert alert-danger" role="alert">
+                    Something went wrong. <?=$_GET['error'];?>
+                </div>
 			<?php endif; ?>
 
-            <form action="scripts/edit_item.php" method="post">
+            <form action="scripts/edit_item.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="id" name="id" placeholder="<?=$info['id'];?>" hidden
+                    <input type="text" class="form-control" id="id" name="id" placeholder="<?=$id;?>" hidden
                            value="<?=$id;?>">
                 </div>
                 <div class="form-group">
@@ -71,27 +63,21 @@ foreach($selected_item as $id => $info): # should only be one
                     <textarea id="content" name="content" class="form-control rounded-0" required
                               placeholder="write some content!"><?=$info['text'];?></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-danger" id="delete-entry">Delete</button><!-- todo -->
 
-                <script>
-                    $(function () {
-                        $('#delete-entry').on('click', function () {
-                            if (confirm('Are you sure you want to remove this news item?')) {
-                                $.ajax('scripts/news_remove.php?id=' + $('#id').val(), {
-                                    'success': function () {
-                                        window.location.href = 'index.php';
-                                    },
-                                })
-                            }
-                        });
-                    })
-                </script>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="picupload" name="bannerimg">
+                        <label id="picuploadlabel" class="custom-file-label" for="picupload">Choose news banner
+                            picture</label>
+                    </div>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" id="delete-entry">Delete</button>
 
             </form>
         </div>
     </div>
 <?php
-endforeach;
 include __DIR__ . '/tpl/body_end.php';
 ?>

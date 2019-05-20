@@ -6,7 +6,7 @@ if ($_GET and isset($_GET['id'])) {
 	$id = $_GET['id'];
 
 
-	$posts = get_posts();
+	$posts = get_ledger();
 
 	if (isset($posts[$id]) and $posts[$id]['status'] != 'removed') {
 
@@ -14,14 +14,15 @@ if ($_GET and isset($_GET['id'])) {
 			$id => [
 				"status"     => "removed",
 				"changetime" => now(),
-				"id"         => $id,
 			]
 		];
 
-		add_update($change);
+		update_ledger($change);
+		remove_entry($id);
 
 		echo 1;
 	} else {
+		remove_entry($id);
 		echo 0;
 	}
 }

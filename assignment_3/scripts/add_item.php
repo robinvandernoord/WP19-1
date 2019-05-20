@@ -1,29 +1,42 @@
 <?php
-/* enable errors for debug */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include 'functions.php';
 
 if ($_POST) {
-	// $original = get_posts();
-
-	$sumid = uniqid();
-	$array = [
+	$sumid  = uniqid();
+	$now    = now();
+	$ledger = [
 		$sumid => [
-			"status"     => "new",
-			"title"      => $_POST['name'],
-			"text"       => $_POST['content'],
-			"changetime" => now(),
-			"createtime" => now(),
-			"id"         => $sumid,
+			"status"     => "active",
+			"changetime" => $now,
 		]
 	];
-//	$result   = array_merge($original, $array);
-//	file_put_contents($file, json_encode($result));
 
-	add_update($array);
+	$entry = [
+		"title"      => $_POST['name'],
+		"text"       => $_POST['content'],
+		"changetime" => $now,
+	];
+
+
+	update_ledger($ledger);
+	update_entry($sumid, $entry);
+
+
+	// file upload
+	if ($_FILES and isset($_FILES["bannerimg"]) and $_FILES["bannerimg"]['size']) {
+		$file = $_FILES["bannerimg"];
+		$validation = validate_file($file);
+		if($validation['success']){
+			$target_file = $datapath . '/' . $sumid . '.png';
+			move_uploaded_file($file["tmp_name"], $target_file);
+		}
+		else {
+			$error = $validation['error'];
+			redirect("../news_edit.php?error=$error&id=$sumid");
+		}
+	}
+
+
 	redirect("../news_edit.php?success=new&id=$sumid");
 }
 redirect('../news_add.php?success=false');

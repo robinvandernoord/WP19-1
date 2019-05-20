@@ -32,7 +32,7 @@ if (isset($_GET['id'])) {
         <div class="col col-12">
             <br>
             <h1>Add a news item</h1>
-            <form action="scripts/add_item.php" method="post">
+            <form action="scripts/add_item.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Title</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter your a news title"
@@ -43,6 +43,14 @@ if (isset($_GET['id'])) {
                     <textarea id="content" name="content" class="form-control rounded-0" required
                               placeholder="write some content!"></textarea>
                 </div>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="picupload" name="bannerimg">
+                        <label id="picuploadlabel" class="custom-file-label" for="picupload">Choose news banner
+                            picture</label>
+                    </div>
+                </div>
+                <br/>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
