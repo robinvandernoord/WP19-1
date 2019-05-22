@@ -8,18 +8,13 @@ if ($_POST) {
 		$sumid => [
 			"status"     => "active",
 			"changetime" => $now,
+			"title"      => $_POST['name'],
+			"text"       => $_POST['content'],
 		]
-	];
-
-	$entry = [
-		"title"      => $_POST['name'],
-		"text"       => $_POST['content'],
-		"changetime" => $now,
 	];
 
 
 	update_ledger($ledger);
-	update_entry($sumid, $entry);
 
 
 	// file upload

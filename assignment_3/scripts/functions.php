@@ -38,7 +38,7 @@ $operators = [
 function get_ledger($filter = null, $operator = '=', $condition = null, $reverse = false) {
 	global $datapath;
 
-	$result = json_decode(file_get_contents("$datapath/ledger.json"), true);
+	$result = json_decode(file_get_contents("$datapath/articles.json"), true);
 
 	if ($filter and $condition) {
 		global $operators;
@@ -58,10 +58,7 @@ function get_ledger($filter = null, $operator = '=', $condition = null, $reverse
 }
 
 function get_content($id) {
-	global $datapath;
-	$file = "$datapath/$id.json";
-
-	return json_decode(file_get_contents($file), true);
+	return get_ledger()[$id];
 
 }
 
@@ -73,20 +70,11 @@ function update_ledger($change) {
 
 	$result = array_merge($old, $change);
 
-	file_put_contents("$datapath/ledger.json", json_encode($result));
+	file_put_contents("$datapath/articles.json", json_encode($result));
 }
-
-function update_entry($id, $content) {
-	global $datapath;
-	$file = "$datapath/$id.json";
-	file_put_contents($file, json_encode($content));
-}
-
 
 function remove_entry($id) {
 	global $datapath;
-	$file = "$datapath/$id.json";
-	unlink($file);
 	$imagefile = "$datapath/$id.png";
 	unlink($imagefile);
 }
@@ -94,7 +82,7 @@ function remove_entry($id) {
 
 function overwrite($new) {
 	global $datapath;
-	file_put_contents("$datapath/ledger.json", json_encode($new));
+	file_put_contents("$datapath/articles.json", json_encode($new));
 }
 
 function redirect($to_where) {
