@@ -2,6 +2,8 @@
 
 include 'scripts/functions.php';
 
+// head of each page
+
 ?>
 
 <!DOCTYPE html>

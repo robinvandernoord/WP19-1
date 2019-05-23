@@ -1,5 +1,8 @@
 <?php
 
+// page for editing news
+// very similar to news add, but with values filled in
+
 /* Header */
 $page_title = 'Webprogramming Assignment 3';
 $navigation = Array(
@@ -19,8 +22,7 @@ include __DIR__ . '/tpl/body_start.php';
 if (isset($_GET['id'])) {
 	$id = $_GET['id'];
 } else {
-	header("Location: news_add.php");
-	die();
+	redirect("news_add.php");
 }
 
 

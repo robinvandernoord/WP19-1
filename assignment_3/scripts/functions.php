@@ -1,4 +1,7 @@
 <?php
+
+// file with helper functions
+
 /* enable errors for debug */
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -12,7 +15,7 @@ function get_path($target) {
 
 	return "$parent/$target";
 }
-
+// path to the 'data' folder, working from both the 'scripts' folder as a real page.
 $datapath = get_path('data');
 
 
@@ -36,6 +39,7 @@ $operators = [
 ];
 
 function get_ledger($filter = null, $operator = '=', $condition = null, $reverse = false) {
+	// get all or specific posts
 	global $datapath;
 
 	$result = json_decode(file_get_contents("$datapath/articles.json"), true);
@@ -58,12 +62,14 @@ function get_ledger($filter = null, $operator = '=', $condition = null, $reverse
 }
 
 function get_content($id) {
+	// get a specific post by ID
 	return get_ledger()[$id];
 
 }
 
 
 function update_ledger($change) {
+	/// change a post
 	global $datapath;
 
 	$old = get_ledger();
@@ -74,6 +80,7 @@ function update_ledger($change) {
 }
 
 function remove_entry($id) {
+	// remove a post
 	global $datapath;
 	$imagefile = "$datapath/$id.png";
 	unlink($imagefile);
@@ -81,20 +88,19 @@ function remove_entry($id) {
 
 
 function overwrite($new) {
+	// overwrite the data file (used to purge old posts for example)
 	global $datapath;
 	file_put_contents("$datapath/articles.json", json_encode($new));
 }
 
 function redirect($to_where) {
+	// shortcut for PHP redirection
 	header("Location: $to_where");
 	die();
 }
 
-function now() {
-	return date('Y-m-d H:i:s', time());
-}
-
 function validate_file($file) {
+	// for file upload, check if a file is alright to use as image
 	$target_file = basename($file["name"]);
 	$extension   = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 	// Check if image file is a actual image or fake image

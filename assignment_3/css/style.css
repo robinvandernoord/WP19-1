@@ -2,21 +2,23 @@
 	margin: 20px;
 }
 
-.bubble{
+/* animation for posts: */
+
+.bubble {
 	animation: animateElement linear .3s;
 	animation-iteration-count: 1;
 	margin-bottom: 20px;
 }
 
-
-/* bubble animation from http://decodedpixel.com/snippits/animate-element-after-jquery-append/ */
-@keyframes animateElement{
+@keyframes animateElement {
 	0% {
-		opacity:0;
-		transform:  translate(0px,10px);
+		opacity: 0;
+		transform: translate(0px, 10px);
 	}
 	100% {
-		opacity:1;
-		transform:  translate(0px,0px);
+		opacity: 1;
+		transform: translate(0px, 0px);
 	}
 }
+
+/* bubble animation from http://decodedpixel.com/snippits/animate-element-after-jquery-append/ */

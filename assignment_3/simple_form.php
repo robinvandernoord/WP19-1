@@ -1,5 +1,8 @@
 <?php
 
+// a simple form with feedback
+
+
 /* Header */
 $page_title = 'Webprogramming Assignment 3';
 $navigation = Array(

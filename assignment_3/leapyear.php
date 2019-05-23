@@ -1,9 +1,6 @@
 <?php
-/* enable errors for debug */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
+// leap year page
 
 /* Header */
 $page_title = 'Webprogramming Assignment 3';
@@ -17,9 +14,8 @@ $navigation = Array(
 	)
 );
 
-include __DIR__ . '/tpl/head.php';
-include __DIR__ . '/tpl/body_start.php';
 
+// calculate the next leap years with users age
 function leapyears_age($age, $count=5) {
 	$form = '';
 
@@ -50,6 +46,9 @@ function leapyears_age($age, $count=5) {
 	return $form;
 }
 
+
+include __DIR__ . '/tpl/head.php';
+include __DIR__ . '/tpl/body_start.php';
 ?>
 
     <div class="row">

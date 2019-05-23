@@ -1,9 +1,6 @@
 <?php
-/* enable errors for debug */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
+// interface for adding news
 
 /* Header */
 $page_title = 'Webprogramming Assignment 3';
@@ -22,8 +19,7 @@ include __DIR__ . '/tpl/body_start.php';
 
 
 if (isset($_GET['id'])) {
-	header("Location: news_edit.php?id=" . $_GET['id']);
-	die();
+	redirect("news_edit.php?id=" . $_GET['id']);
 }
 
 ?>

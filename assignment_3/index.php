@@ -1,5 +1,8 @@
 <?php
 
+
+// news page, loads posts dynamically
+
 /* Header */
 $page_title = 'Webprogramming Assignment 3';
 $navigation = Array(

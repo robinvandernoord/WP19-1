@@ -1,13 +1,14 @@
 <?php
 include 'functions.php';
 
+// same as add_item but with an existing ID, redirect to different pages.
+
 if ($_POST) {
 	$sumid  = $_POST['id'];
-	$now    = now();
 	$ledger = [
 		$sumid => [
 			"status"     => "active",
-			"changetime" => $now,
+			"changetime" => time(),
 			"title"      => $_POST['name'],
 			"text"       => $_POST['content'],
 		]

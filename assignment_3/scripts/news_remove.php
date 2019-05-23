@@ -1,5 +1,7 @@
 <?php
 
+// remove a news item
+
 include 'functions.php';
 
 if ($_GET and isset($_GET['id'])) {
@@ -13,7 +15,7 @@ if ($_GET and isset($_GET['id'])) {
 		$change = [
 			$id => [
 				"status"     => "removed",
-				"changetime" => now(),
+				"changetime" => time(),
 			]
 		];
 

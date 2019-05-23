@@ -1,3 +1,6 @@
+// leap year js for leapyear.php
+// validates inputs and gives feedback
+
 const regexes = {
     "name": /^[A-z -]+$/,
     "age": /^[0-9]{1,3}$/,

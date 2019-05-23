@@ -1,1 +1,2 @@
-<div class="container">
+<div class="container"><?php // opening of page
+?>
